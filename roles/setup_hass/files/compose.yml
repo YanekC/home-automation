@@ -1,0 +1,18 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      #- ./hass:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    privileged: true
+    networks:
+      my-network:
+        ipv4_address: 10.5.0.2
+
+networks:
+  my-network:
+    external:
+      name: my-network

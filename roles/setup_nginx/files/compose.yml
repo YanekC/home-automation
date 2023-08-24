@@ -1,17 +1,5 @@
 version: '3'
 services:
-  homeassistant:
-    container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
-    volumes:
-      #- ./hass:/config
-      - /etc/localtime:/etc/localtime:ro
-    restart: always
-    privileged: true
-    networks:
-      network:
-        ipv4_address: 10.5.0.2
-
   nginx:
     container_name: nginx
     image: "docker.io/arm64v8/nginx:1"
@@ -28,6 +16,7 @@ services:
 
 networks:
   network:
+    name: my-network
     driver: bridge
     ipam:
       config:

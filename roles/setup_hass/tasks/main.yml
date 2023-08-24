@@ -1,0 +1,18 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: /home/yanck/hass/
+    state: directory
+- name: Copy docker compose file to pi
+  ansible.builtin.copy:
+    src: ../files/
+    dest: /home/yanck/hass/
+    force: true
+
+- name: Tear down hass services
+  community.docker.docker_compose:
+    project_src: /home/yanck/hass
+    state: absent
+
+- name: Create and start hass services
+  community.docker.docker_compose:
+    project_src: /home/yanck/hass
