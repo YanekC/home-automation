@@ -1,0 +1,47 @@
+- name: Make sudo require password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/010_pi-nopasswd
+    regexp: '^yanck ALL=(ALL)'
+    line: 'yanck ALL=(ALL) PASSWD: ALL'
+
+- name: Setup SSH option ChallengeResponseAuthentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'ChallengeResponseAuthentication'
+    line: 'ChallengeResponseAuthentication no'
+- name: Setup SSH option PasswordAuthentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'PasswordAuthentication'
+    line: 'PasswordAuthentication  no'
+- name: Setup SSH option PermitRootLogin
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'PermitRootLogin'
+    line: 'PermitRootLogin no '
+- name: Setup SSH option UsePAM
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'UsePAM'
+    line: 'UsePAM  no'
+
+
+- name: Add ssh rule to firewall
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+- name: Add http rule to firewall
+  community.general.ufw:
+    rule: allow
+    port: http
+    proto: tcp
+- name: Add https rule to firewall
+  community.general.ufw:
+    rule: allow
+    port: https
+    proto: tcp
+- name: Enable firewall
+  community.general.ufw:
+    state: enabled
+    policy: deny

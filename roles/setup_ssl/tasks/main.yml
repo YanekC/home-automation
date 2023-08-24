@@ -1,0 +1,27 @@
+#For ssl
+- name: install basic snap packages
+  community.general.snap:
+    name: ['core']
+    state: present
+- name: install certbot snap packages
+  community.general.snap:
+    name: ['certbot']
+    state: present
+    classic: true
+    options: certbot:trust-plugin-with-root=ok
+- name: install certbot-dns-ovh snap packages
+  community.general.snap:
+    name: ['certbot-dns-ovh']
+    state: present
+- name:
+  ansible.builtin.file:
+    state: link
+    src: /snap/bin/certbot
+    path: /usr/bin/certbot
+- name: copy ovh creds
+  ansible.builtin.copy:
+    src: ../secrets/ovh.ini
+    dest: /etc/ovh.ini
+    mode: '600'
+    force: true
+    owner: root

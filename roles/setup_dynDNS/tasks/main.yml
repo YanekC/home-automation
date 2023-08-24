@@ -1,0 +1,16 @@
+#DynDNS
+- name: Creat ddclient user
+  ansible.builtin.user:
+    create_home: false
+    state: present
+    name: ddclient
+    password: '!'
+    shell: /usr/sbin/nologin
+- name: copy ddclient conf
+  ansible.builtin.copy:
+    src: ../secrets/ddclient.conf
+    dest: /etc/ddclient.conf
+    force: true
+    owner: ddclient
+    mode: '600'
+

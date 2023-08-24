@@ -1,0 +1,9 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: /home/yanck/home-automation/
+    state: directory
+- name: Copy docker compose file to pi
+  ansible.builtin.copy:
+    src: ../files/
+    dest: /home/yanck/home-automation/
+    force: true

@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  
+
+  tasks:
+    - name: Generate certs
+      ansible.builtin.shell: certbot certonly --standalone -d *.yanck.ovh
+    - name: Renew ssl cert
+      ansible.builtin.cron:
+        name: "Renew ssl cert"
+        minute: "0"
+        hour: "5,2"
+        job: "certbot renew"

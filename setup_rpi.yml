@@ -1,6 +1,30 @@
 ---
-- hosts: webservers
-  remote_user: root
+- hosts: all
+  become: yes
+
   tasks:
-    - name: test connection
-      ping:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+    - name: Setup DynDNS
+      include_role:
+        name: setup_dynDNS
+    - name: Setup SSL
+      include_role:
+        name: setup_ssl
+
+    - name: Setup docker compose
+      include_role:
+        name: setup_docker_compose
+
+    - name: Tear down existing services
+      community.docker.docker_compose:
+        project_src: /home/yanck/home-automation
+        state: absent
+
+    - name: Create and start services
+      community.docker.docker_compose:
+        project_src: /home/yanck/home-automation

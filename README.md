@@ -17,3 +17,12 @@ Setup du pi:
 -Setup un reverse proxy
 
 -Setup Home Assistant
+
+-Recuperer un certificat ssl:
+    Impossible de recup automatiquement via certbot pour la generation du cert. Du coup les commandes a faire a la main :
+        sudo certbot certonly \
+        --dns-ovh \
+        --dns-ovh-credentials /etc/ovh.ini \
+        --dns-ovh-propagation-seconds 60 \
+        -d *.yanck.ovh
+        
