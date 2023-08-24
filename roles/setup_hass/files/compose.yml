@@ -9,10 +9,10 @@ services:
     restart: always
     privileged: true
     networks:
-      my-network:
+      network:
         ipv4_address: 10.5.0.2
 
 networks:
-  my-network:
-    external:
-      name: my-network
+  network:
+    name: proxy_network
+    external: true

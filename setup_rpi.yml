@@ -16,15 +16,10 @@
       include_role:
         name: setup_ssl
 
-    - name: Setup docker compose
+    - name: Setup nginx
       include_role:
-        name: setup_docker_compose
+        name: setup_nginx
 
-    - name: Tear down existing services
-      community.docker.docker_compose:
-        project_src: /home/yanck/home-automation
-        state: absent
-
-    - name: Create and start services
-      community.docker.docker_compose:
-        project_src: /home/yanck/home-automation
+    - name: Setup home assistant
+      include_role:
+        name: setup_hass

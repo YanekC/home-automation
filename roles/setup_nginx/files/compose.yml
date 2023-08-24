@@ -16,8 +16,5 @@ services:
 
 networks:
   network:
-    name: my-network
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
+    name: proxy_network
+    external: true
