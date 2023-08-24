@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Tear down hass services
+      community.docker.docker_compose:
+        project_src: /home/yanck/hass
+        state: absent
+
+    - name: Copy hass conf files to pi
+      ansible.builtin.copy:
+        src: roles/setup_hass/files/hass/
+        dest: /mnt/grosse_usb/hass/
+        force: true
+
+    - name: Create and start hass services
+      community.docker.docker_compose:
+        project_src: /home/yanck/hass

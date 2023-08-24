@@ -45,3 +45,10 @@
   community.general.ufw:
     state: enabled
     policy: deny
+
+- name: Mount USB file system
+  ansible.posix.mount:
+    src: /dev/sda1
+    path: /mnt/grosse_usb
+    fstype: ext4
+    state: mounted

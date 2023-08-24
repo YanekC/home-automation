@@ -6,7 +6,7 @@ homeassistant:
     - type: homeassistant
   auth_mfa_modules:
     - type: totp
-  name: Chez Zoé et Yanek
+  name: "Chez Zoé et Yanek"
   latitude: 47.4005
   longitude: -2.15012
   elevation: 20

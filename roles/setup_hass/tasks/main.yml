@@ -4,8 +4,14 @@
     state: directory
 - name: Copy docker compose file to pi
   ansible.builtin.copy:
-    src: ../files/
+    src: ../files/compose.yml
     dest: /home/yanck/hass/
+    force: true
+
+- name: Copy hass conf files to pi
+  ansible.builtin.copy:
+    src: ../files/hass/
+    dest: /mnt/grosse_usb/hass/
     force: true
 
 - name: Tear down hass services
