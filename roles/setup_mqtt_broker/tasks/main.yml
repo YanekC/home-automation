@@ -6,6 +6,21 @@
   ansible.builtin.file:
     path: /mnt/grosse_usb/mosquitto/
     state: directory
+- name: Copy mosquitto conf files to pi
+  ansible.builtin.copy:
+    src: ../files/mosquitto/
+    dest: /mnt/grosse_usb/mosquitto/config/
+    mode: '600'
+    owner: root
+    force: true
+- name: Copy mosquitto secrets files to pi
+  ansible.builtin.copy:
+    src: ../secrets/mosquitto/
+    dest: /mnt/grosse_usb/mosquitto/config/
+    mode: '600'
+    owner: root
+    force: true
+
 - name: Copy docker compose file to pi
   ansible.builtin.copy:
     src: ../files/compose.yml
