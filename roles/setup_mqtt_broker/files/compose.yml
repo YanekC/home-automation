@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: "docker.io/arm64v8/eclipse-mosquitto:2"
+    volumes:
+      - /mnt/grosse_usb/mosquitto:/mosquitto
+    restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.4
+
+networks:
+  network:
+    name: proxy_network
+    external: true

@@ -20,6 +20,10 @@
       include_role:
         name: setup_nginx
 
+    - name: Setup mosquitto
+      include_role:
+        name: setup_mqtt_broker
+
     - name: Setup home assistant
       include_role:
         name: setup_hass

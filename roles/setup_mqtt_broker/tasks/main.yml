@@ -1,0 +1,23 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: /home/yanck/mosquitto/
+    state: directory
+- name: Create directory for backup
+  ansible.builtin.file:
+    path: /mnt/grosse_usb/mosquitto/
+    state: directory
+- name: Copy docker compose file to pi
+  ansible.builtin.copy:
+    src: ../files/compose.yml
+    dest: /home/yanck/mosquitto/
+    force: true
+
+
+- name: Tear down mosquitto services
+  community.docker.docker_compose:
+    project_src: /home/yanck/mosquitto
+    state: absent
+
+- name: Create and start mosquitto services
+  community.docker.docker_compose:
+    project_src: /home/yanck/mosquitto
