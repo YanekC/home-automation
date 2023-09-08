@@ -1,0 +1,9 @@
+[Unit]
+Description=Run rtl_433 and send it's output to mqtt
+After=network-online.target
+
+[Service]
+ExecStart=/home/yanck/rtl_433_mqtt.sh
+
+[Install]
+WantedBy=multi-user.target

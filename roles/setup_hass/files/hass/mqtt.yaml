@@ -1,0 +1,52 @@
+sensor:
+  - device:
+      identifiers: "78_433Mhz"
+      name: "Temperature Sensor (433 Mhz probe)"
+    name: "Temperature"
+    unique_id: "78_temp_433"
+    state_topic: "rtl_433/78/temperature_F"
+    unit_of_measurement: "°F"
+    force_update: true
+    device_class: "temperature"
+  - device:
+      identifiers: "78_433Mhz"
+    name: "Humidity"
+    unique_id: "78_humidity_433"
+    state_topic: "rtl_433/78/humidity"
+    unit_of_measurement: "%"
+    force_update: true
+    device_class: "humidity"
+  - device:
+      identifiers: "78_433Mhz"
+    name: "Battery"
+    unique_id: "78_battery_433"
+    state_topic: "rtl_433/78/battery_ok"
+    unit_of_measurement: "bit"
+    force_update: true
+    device_class: "battery"
+
+  - device:
+      identifiers: "235_433Mhz"
+      name: "Temperature Sensor (433 Mhz probe)"
+    name: "Temperature"
+    unique_id: "235_temp_433"
+    state_topic: "rtl_433/235/temperature_F"
+    unit_of_measurement: "°F"
+    force_update: true
+    device_class: "temperature"
+  - device:
+      identifiers: "235_433Mhz"
+    name: "Humidity"
+    unique_id: "235_humidity_433"
+    state_topic: "rtl_433/235/humidity"
+    unit_of_measurement: "%"
+    force_update: true
+    device_class: "humidity"
+  - device:
+      identifiers: "235_433Mhz"
+    name: "Battery"
+    unique_id: "235_battery_433"
+    state_topic: "rtl_433/235/battery_ok"
+    unit_of_measurement: "bit"
+    force_update: true
+    device_class: "battery"

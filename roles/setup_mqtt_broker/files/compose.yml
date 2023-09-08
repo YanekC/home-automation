@@ -5,6 +5,8 @@ services:
     image: "docker.io/arm64v8/eclipse-mosquitto:2"
     volumes:
       - /mnt/grosse_usb/mosquitto:/mosquitto
+    ports:
+      - 1883:1883
     restart: always
     networks:
       network:

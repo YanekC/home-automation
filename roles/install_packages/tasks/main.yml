@@ -9,7 +9,7 @@
     update_cache: yes
 - name: Install basic packages for installation
   ansible.builtin.apt:
-    name: [ 'ca-certificates', 'curl', 'gnupg', 'pip', 'ufw', 'ddclient', 'snapd' ]
+    name: [ 'ca-certificates', 'curl', 'gnupg', 'pip', 'ufw', 'ddclient', 'snapd', 'rtl-433' ]
     state: present
     update_cache: yes
 - name: Add Docker s GPG key for ubuntu from official site

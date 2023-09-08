@@ -29,17 +29,23 @@
 - name: Add ssh rule to firewall
   community.general.ufw:
     rule: limit
-    port: ssh
+    to_port: ssh
     proto: tcp
 - name: Add http rule to firewall
   community.general.ufw:
     rule: allow
-    port: http
+    to_port : http
     proto: tcp
 - name: Add https rule to firewall
   community.general.ufw:
     rule: allow
-    port: https
+    to_port : https
+    proto: tcp
+- name: Add mqtt rule for desktop pc to firewall
+  community.general.ufw:
+    from_ip: 192.168.1.86
+    rule: allow
+    to_port: "1883"
     proto: tcp
 - name: Enable firewall
   community.general.ufw:
@@ -52,3 +58,21 @@
     path: /mnt/grosse_usb
     fstype: ext4
     state: mounted
+
+- name: add udev rules for RTL-SDR dongle
+  ansible.builtin.copy:
+    src: ../files/rtl-sdr.rules
+    dest: /etc/udev/rules.d/
+    force: true
+
+- name: add password as env var for rtl-sdr
+  ansible.builtin.copy:
+    src: ../secrets/rtl-sdr.sh
+    dest: /etc/profile.d/
+    force: true
+
+- name: add cron for rtl-sdr
+  ansible.builtin.cron:
+    name: rtl-sdr-cron
+    minute: '*/10'
+    job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
