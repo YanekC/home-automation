@@ -20,6 +20,7 @@ homeassistant:
   legacy_templates: false
 
 automation: !include automations.yaml
+automation sdb bas: !include automation_sdb_bas.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 

@@ -1,0 +1,12 @@
+- alias: Automatisation radiateur salle de bain
+  id: sdb_radiateur
+  description: >-
+    Lancement automatique du radiateur lorsqu'on à pris une douche.
+    En fonction de la température, on allume plus ou moins longtemps le radiateur
+  initial_state: false
+
+  trigger:
+
+  condition:
+
+  action:
