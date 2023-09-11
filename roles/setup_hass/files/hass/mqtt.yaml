@@ -55,3 +55,32 @@
     unit_of_measurement: "bit"
     force_update: true
     device_class: "battery"
+
+- sensor:
+      device:
+          identifiers: "214_433Mhz"
+          name: "Temperature Sensor 214"
+      name: "Temperature"
+      unique_id: "214_temp_433"
+      state_topic: "rtl_433/214/temperature_F"
+      unit_of_measurement: "°F"
+      force_update: true
+      device_class: "temperature"
+- sensor:
+      device:
+          identifiers: "214_433Mhz"
+      name: "Humidity"
+      unique_id: "214_humidity_433"
+      state_topic: "rtl_433/214/humidity"
+      unit_of_measurement: "%"
+      force_update: true
+      device_class: "humidity"
+- sensor:
+      device:
+          identifiers: "214_433Mhz"
+      name: "Battery"
+      unique_id: "214_battery_433"
+      state_topic: "rtl_433/214/battery_ok"
+      unit_of_measurement: "bit"
+      force_update: true
+      device_class: "battery"
