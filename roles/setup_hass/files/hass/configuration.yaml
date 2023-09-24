@@ -21,6 +21,7 @@ homeassistant:
 
 automation: !include automations.yaml
 automation sdb bas: !include automation_sdb_bas.yaml
+automation general: !include automation_general.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 

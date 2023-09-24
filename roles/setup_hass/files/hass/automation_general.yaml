@@ -1,0 +1,16 @@
+alias: "Temperature extérieur moins élevée "
+description: "Il est temps d'ouvrir les fenêtres ! "
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.78_temp_433
+    below: sensor.235_temp_433
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+condition: []
+action:
+  - service: notify.mobile_app_oneplus_de_yanek
+    data:
+      message: "La température extérieure est plus basse qu'à l'intérieur"
+mode: restart

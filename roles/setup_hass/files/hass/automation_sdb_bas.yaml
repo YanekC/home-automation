@@ -1,12 +1,32 @@
-- alias: Automatisation radiateur salle de bain
-  id: sdb_radiateur
-  description: >-
-    Lancement automatique du radiateur lorsqu'on à pris une douche.
-    En fonction de la température, on allume plus ou moins longtemps le radiateur
-  initial_state: false
-
+- alias: Allumage radiateur couplé au switch
+  id: "radia_couple_switch_on"
+  description: "Allume le radiateur lorsqu'on allume la lumière"
   trigger:
-
-  condition:
-
+    - platform: state
+      entity_id: light.shelly_switch_sdb_switch_0
+      from: "off"
+      to: "on"
+  condition: [ ]
   action:
+    - service: switch.turn_on
+      target:
+        entity_id:
+          - switch.shelly_prise_radiateur_sdb_switch_0
+      data: { }
+  mode: single
+- alias: Extinction radiateur couplé au switch
+  id: "radia_couple_switch_off"
+  description: "Eteint le radiateur lorsqu'on éteint la lumière"
+  trigger:
+    - platform: state
+      entity_id: light.shelly_switch_sdb_switch_0
+      from: "on"
+      to: "off"
+  condition: [ ]
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.shelly_prise_radiateur_sdb_switch_0
+      data: { }
+  mode: single
