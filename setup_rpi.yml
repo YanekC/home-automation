@@ -2,6 +2,11 @@
 - hosts: all
   become: yes
 
+  vars:
+    gros_disque_path: /mnt/gros_disque
+    arr_user: arr_user
+    arr_user_uid: 1053
+
   tasks:
     - name: Install Packages
       include_role:
@@ -9,9 +14,6 @@
     - name: Basic Conf
       include_role:
         name: basic_conf
-    - name: Setup DynDNS
-      include_role:
-        name: setup_dynDNS
     - name: Setup SSL
       include_role:
         name: setup_ssl

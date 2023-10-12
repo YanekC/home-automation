@@ -4,7 +4,7 @@
     update_cache: yes
 - name: Uninstall packages
   ansible.builtin.apt:
-    name: ['certbot']
+    name: [ 'certbot' ]
     state: absent
     update_cache: yes
 - name: Install basic packages for installation
@@ -18,14 +18,14 @@
     state: present
 - name: Configure Docker stable repository for raspbian
   ansible.builtin.apt_repository:
-    repo: deb [arch=arm64] https://download.docker.com/linux/debian bullseye stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable
     state: present
     update_cache: yes
 - name: Install docker packages
   ansible.builtin.apt:
-    name: [ 'docker-ce' ,'docker-ce-cli' ,'containerd.io', 'docker-compose-plugin' ]
+    name: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin' ]
     state: present
     update_cache: yes
 - name: Install docker SDK package
   ansible.builtin.pip:
-    name: [ 'pyopenssl', 'docker', 'docker-compose' ]
+    name: [ 'docker' ]

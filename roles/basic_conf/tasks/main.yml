@@ -1,9 +1,3 @@
-- name: Make sudo require password
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/010_pi-nopasswd
-    regexp: '^yanck ALL=(ALL)'
-    line: 'yanck ALL=(ALL) PASSWD: ALL'
-
 - name: Setup SSH option ChallengeResponseAuthentication
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
@@ -41,23 +35,22 @@
     rule: allow
     to_port : https
     proto: tcp
-- name: Add mqtt rule for desktop pc to firewall
+- name: open firewall on tcp lan
   community.general.ufw:
-    from_ip: 192.168.1.86
+    from_ip: 192.168.0.0/16
     rule: allow
-    to_port: "1883"
     proto: tcp
 - name: Enable firewall
   community.general.ufw:
     state: enabled
     policy: deny
 
-- name: Mount USB file system
-  ansible.posix.mount:
-    src: /dev/sda1
-    path: /mnt/grosse_usb
-    fstype: ext4
-    state: mounted
+#- name: Mount USB file system
+#  ansible.posix.mount:
+#    src: /dev/sda1
+#    path: /mnt/grosse_usb
+#    fstype: ext4
+#    state: mounted
 
 - name: add udev rules for RTL-SDR dongle
   ansible.builtin.copy:
@@ -71,8 +64,8 @@
     dest: /etc/profile.d/
     force: true
 
-- name: add cron for rtl-sdr
-  ansible.builtin.cron:
-    name: rtl-sdr-cron
-    minute: '*/10'
-    job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
+#- name: add cron for rtl-sdr
+#  ansible.builtin.cron:
+#    name: rtl-sdr-cron
+#    minute: '*/10'
+#    job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
