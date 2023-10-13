@@ -28,4 +28,6 @@
     update_cache: yes
 - name: Install docker SDK package
   ansible.builtin.pip:
-    name: [ 'docker' ]
+    #need good venv in inventory
+    #pip install "cython<3.0.0" wheel && pip install pyyaml==5.4.1 --no-build-isolatio ??
+    name: ['docker', 'docker-compose' ]
