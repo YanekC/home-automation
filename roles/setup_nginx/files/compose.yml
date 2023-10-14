@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    image: "docker.io/arm64v8/nginx:1"
+    image: "docker.io/amd64/nginx:1"
     restart: always
     volumes:
       - ./nginx_conf/nginx.conf:/etc/nginx/nginx.conf
