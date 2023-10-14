@@ -13,6 +13,10 @@
     src: ../files/hass/
     dest: /mnt/grosse_usb/hass/
     force: true
+- name: Copy hass conf files to pi
+  ansible.builtin.copy:
+    src: ../files/hass_no_force/
+    dest: /mnt/grosse_usb/hass/
 
 - name: Tear down hass services
   community.docker.docker_compose:
