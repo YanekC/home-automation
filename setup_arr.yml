@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    gros_disque_path: /mnt/gros_disque
+    grosse_usb_path: /mnt/grosse_usb/arr
+    arr_user: arr_user
+    arr_user_uid: 1053
+
+  tasks:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+    - name: Setup *arr
+      include_role:
+        name: setup_arr

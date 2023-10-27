@@ -52,6 +52,13 @@
 #    fstype: ext4
 #    state: mounted
 
+- name: Mount Gros disque file system
+  ansible.posix.mount:
+    src: /dev/sda2
+    path: /mnt/gros_disque
+    fstype: ext4
+    state: mounted
+
 - name: add udev rules for RTL-SDR dongle
   ansible.builtin.copy:
     src: ../files/rtl-sdr.rules

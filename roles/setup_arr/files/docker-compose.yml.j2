@@ -1,0 +1,141 @@
+version: "3"
+networks:
+  arr_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.10.0/24
+services:
+  radarr:
+    container_name: radarr
+    image: cr.hotio.dev/hotio/radarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - {{ grosse_usb_path }}/config/radarr:/config
+      - {{ gros_disque_path }}/data:/data
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.8
+  sonarr:
+    container_name: sonarr
+    image: cr.hotio.dev/hotio/sonarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - {{ grosse_usb_path }}/config/sonarr:/config
+      - {{ gros_disque_path }}/data:/data
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.2
+  bazarr:
+    container_name: bazarr
+    image: cr.hotio.dev/hotio/bazarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - "6767:6767"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - {{ grosse_usb_path }}/config/bazarr:/config
+      - {{ gros_disque_path }}/data/media:/data/media
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.3
+  prowlarr:
+    container_name: prowlarr
+    image: ghcr.io/hotio/prowlarr
+    ports:
+      - "9696:9696"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - {{ grosse_usb_path }}/config/prowlarr:/config
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.4
+  jellyfin:
+    container_name: jellyfin
+    image: ghcr.io/hotio/jellyfin
+    ports:
+      - "8096:8096"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - {{ grosse_usb_path }}/config/jellyfin:/config
+      - {{ gros_disque_path }}/data:/data
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.5
+  qbittorrent:
+    container_name: qbittorrent
+    image: ghcr.io/hotio/qbittorrent
+    ports:
+      - "8080:8080"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - {{ grosse_usb_path }}/config/qbittorrent:/config
+      - {{ gros_disque_path }}/data:/data
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.6
+  jellyseerr:
+    container_name: jellyseerr
+    image: ghcr.io/hotio/jellyseerr
+    ports:
+      - "5055:5055"
+    environment:
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+      - TZ=Europe/Paris
+    volumes:
+      - {{ grosse_usb_path }}/config/jellyseerr:/config
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.7
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Europe/Paris
+      - PUID={{ arr_user_uid }}
+      - PGID=100
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+    networks:
+      arr_network:
+        ipv4_address: 172.19.10.9
