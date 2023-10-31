@@ -34,8 +34,4 @@ http:
   login_attempts_threshold: 5
   cors_allowed_origins: https://hass.yanck.ovh
 
-owntracks:
-  max_gps_accuracy: 100
-  mqtt_topic: 'owntracks/#'
-
 mqtt: !include mqtt.yaml
