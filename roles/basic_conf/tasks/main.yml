@@ -47,7 +47,7 @@
 
 - name: Mount Gros disque file system
   ansible.posix.mount:
-    src: /dev/sda2
+    src: UUID=1985d0b0-8062-466e-a553-2f0f048644e7
     path: /mnt/gros_disque
     fstype: ext4
     state: mounted
@@ -64,8 +64,16 @@
     dest: /etc/profile.d/
     force: true
 
-#- name: add cron for rtl-sdr
-#  ansible.builtin.cron:
-#    name: rtl-sdr-cron
-#    minute: '*/10'
-#    job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
+- name: copy cron script
+  ansible.builtin.copy:
+    src: ../files/rtl_433_mqtt.sh
+    dest: /home/yanck/
+    force: true
+    mode: u+rwx
+
+- name: add cron for rtl-sdr
+  ansible.builtin.cron:
+    name: rtl-sdr-cron
+    minute: '*/8'
+    job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
+    state: absent
