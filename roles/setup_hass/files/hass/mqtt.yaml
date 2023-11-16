@@ -29,29 +29,34 @@
 
 - sensor:
     device:
-      identifiers: "235_433Mhz"
-      name: "Temperature Sensor 235"
+      identifiers: "158_433Mhz"
+      name: "Temperature Sensor 158"
     name: "Temperature"
-    unique_id: "235_temp_433"
-    state_topic: "rtl_433/235/temperature_F"
+    unique_id: "158_temp_433"
+    state_topic: "rtl_433/158/temperature_F"
     unit_of_measurement: "°F"
     force_update: true
     device_class: "temperature"
 - sensor:
     device:
-      identifiers: "235_433Mhz"
+      identifiers: "158_433Mhz"
     name: "Humidity"
-    unique_id: "235_humidity_433"
-    state_topic: "rtl_433/235/humidity"
+    unique_id: "158_humidity_433"
+    state_topic: "rtl_433/158/humidity"
     unit_of_measurement: "%"
     force_update: true
     device_class: "humidity"
 - sensor:
     device:
-      identifiers: "235_433Mhz"
+      identifiers: "158_433Mhz"
     name: "Battery"
-    unique_id: "235_battery_433"
-    state_topic: "rtl_433/235/battery_ok"
+    unique_id: "158_battery_433"
+    state_topic: "rtl_433/158/battery_ok"
     unit_of_measurement: "bit"
     force_update: true
     device_class: "battery"
+
+- binary_sensor:
+      state_topic: "rtl_433/17692/id"
+      payload_on: "17692"
+      off_delay: 2

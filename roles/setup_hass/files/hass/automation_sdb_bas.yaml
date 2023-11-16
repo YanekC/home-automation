@@ -8,11 +8,10 @@
       to: "on"
   condition: [ ]
   action:
-    - service: switch.turn_on
-      target:
-        entity_id:
-          - switch.shelly_prise_radiateur_sdb_switch_0
-      data: { }
+    - type: turn_on
+      device_id: 1d419c3a583aea1bc81f5d69687023c0
+      entity_id: e830b5dacdfcfdfee2430edf370295ed
+      domain: switch
   mode: single
 - alias: Extinction radiateur couplé au switch
   id: "radia_couple_switch_off"
@@ -24,9 +23,81 @@
       to: "off"
   condition: [ ]
   action:
-    - service: switch.turn_off
-      target:
-        entity_id:
-          - switch.shelly_prise_radiateur_sdb_switch_0
-      data: { }
+    - type: turn_off
+      device_id: 1d419c3a583aea1bc81f5d69687023c0
+      entity_id: e830b5dacdfcfdfee2430edf370295ed
+      domain: switch
+  mode: single
+
+- alias: Ouverture volet après douche
+  description: ""
+  trigger:
+    - platform: device
+      type: turned_on
+      device_id: 39c42233ff6484b0dac8ff2533fb9f4b
+      entity_id: 86aa7b5e10b70f77d5ffcf1d68b564fb
+      domain: light
+  condition:
+    - condition: time
+      after: "05:45:00"
+      before: "10:00:00"
+  action:
+    - device_id: 306188294209698da3bebccbc34d9b0d
+      domain: cover
+      entity_id: d70e765e33e2e5816e9b10b6b2bd5b46
+      type: open
+  mode: single
+
+- alias: Ouverture volet soleil
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: "30"
+  condition: [ ]
+  action:
+    - device_id: 306188294209698da3bebccbc34d9b0d
+      domain: cover
+      entity_id: d70e765e33e2e5816e9b10b6b2bd5b46
+      type: open
+  mode: single
+
+- alias: "Programme radiateur allumage"
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.chauffage_sdb
+      from: "off"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_boolean.programmation_chauffage_sdb
+      state: "on"
+  action:
+    - type: turn_on
+      device_id: 1d419c3a583aea1bc81f5d69687023c0
+      entity_id: e830b5dacdfcfdfee2430edf370295ed
+      domain: switch
+  mode: single
+
+- alias: Programme radiateur extinction
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.chauffage_sdb
+      from: "on"
+      to: "off"
+  condition:
+    - condition: device
+      type: is_off
+      device_id: 39c42233ff6484b0dac8ff2533fb9f4b
+      entity_id: 86aa7b5e10b70f77d5ffcf1d68b564fb
+      domain: light
+  action:
+    - type: turn_off
+      device_id: 1d419c3a583aea1bc81f5d69687023c0
+      entity_id: e830b5dacdfcfdfee2430edf370295ed
+      domain: switch
   mode: single

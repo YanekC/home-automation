@@ -1,16 +1,79 @@
-alias: "Temperature extérieur moins élevée "
-description: "Il est temps d'ouvrir les fenêtres ! "
-trigger:
-  - platform: numeric_state
-    entity_id: sensor.78_temp_433
-    below: sensor.235_temp_433
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-condition: []
-action:
-  - service: notify.mobile_app_oneplus_de_yanek
-    data:
-      message: "La température extérieure est plus basse qu'à l'intérieur"
-mode: restart
+- alias: "Temperature extérieur moins élevée "
+  description: "Il est temps d'ouvrir les fenêtres ! "
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.78_temp_433
+      below: sensor.235_temp_433
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+  condition: []
+  action:
+    - service: notify.mobile_app_oneplus_de_yanek
+      data:
+        message: "La température extérieure est plus basse qu'à l'intérieur"
+  mode: restart
+
+- alias: Fermeture volet buanderie
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "60"
+    - platform: device
+      device_id: 883f42b490e876320bdcbde3e7eaab6c
+      domain: device_tracker
+      entity_id: ca519ca33cf9cc8e3a8454de6f2916dc
+      type: enters
+      zone: zone.home
+  condition:
+    - condition: device
+      device_id: 883f42b490e876320bdcbde3e7eaab6c
+      domain: device_tracker
+      entity_id: ca519ca33cf9cc8e3a8454de6f2916dc
+      type: is_home
+    - condition: sun
+      after: sunset
+      after_offset: "60"
+  action:
+    - delay:
+        hours: 0
+        minutes: 15
+        seconds: 0
+        milliseconds: 0
+    - device_id: 306188294209698da3bebccbc34d9b0d
+      domain: cover
+      entity_id: d70e765e33e2e5816e9b10b6b2bd5b46
+      type: close
+  mode: single
+
+
+- alias: Fermeture volet soleil
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: 0
+  condition: [ ]
+  action:
+    - device_id: 7fe022109d91df709c6bb443b1321241
+      domain: cover
+      entity_id: db32937d3ab443d1df110aa0716d7cbc
+      type: close
+  mode: single
+
+- alias: Ouverture volets soleil
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: 0
+  condition: [ ]
+  action:
+    - device_id: 7fe022109d91df709c6bb443b1321241
+      domain: cover
+      entity_id: db32937d3ab443d1df110aa0716d7cbc
+      type: open
+  mode: single
+
