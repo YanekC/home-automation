@@ -39,7 +39,7 @@
   community.general.ufw:
     from_ip: 192.168.0.0/16
     rule: allow
-    proto: tcp
+    proto: any
 - name: Enable firewall
   community.general.ufw:
     state: enabled
