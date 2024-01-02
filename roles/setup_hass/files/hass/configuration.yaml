@@ -34,4 +34,19 @@ http:
   login_attempts_threshold: 5
   cors_allowed_origins: https://hass.yanck.ovh
 
-mqtt: !include mqtt.yaml
+climate:
+  - platform: generic_thermostat
+    name: Général
+    unique_id: generic_thermostat_general
+    heater: switch.shelly1pm_pac_switch_0
+    target_sensor: sensor.shellyht_1bddbd_temperature
+    min_temp: 15
+    max_temp: 25
+    ac_mode: false
+    target_temp: 21
+    cold_tolerance: 0
+    hot_tolerance: 0
+    keep_alive:
+      minutes: 3
+    away_temp: 16
+    precision: 0.5

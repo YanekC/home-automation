@@ -21,18 +21,19 @@
     - platform: sun
       event: sunset
       offset: "60"
-    - platform: device
-      device_id: 883f42b490e876320bdcbde3e7eaab6c
-      domain: device_tracker
-      entity_id: ca519ca33cf9cc8e3a8454de6f2916dc
-      type: enters
-      zone: zone.home
+    - platform: state
+      entity_id:
+        - sensor.oneplus_de_yanek_wifi_bssid
+      from: "<not connected>"
+      to: "e8:9f:80:af:7d:65"
+      for:
+        hours: 0
+        minutes: 2
+        seconds: 0
   condition:
-    - condition: device
-      device_id: 883f42b490e876320bdcbde3e7eaab6c
-      domain: device_tracker
-      entity_id: ca519ca33cf9cc8e3a8454de6f2916dc
-      type: is_home
+    - condition: state
+      entity_id: sensor.oneplus_de_yanek_wifi_bssid
+      state: "e8:9f:80:af:7d:65"
     - condition: sun
       after: sunset
       after_offset: "60"
@@ -54,7 +55,7 @@
   trigger:
     - platform: sun
       event: sunset
-      offset: 0
+      offset: 30
   condition: [ ]
   action:
     - device_id: 7fe022109d91df709c6bb443b1321241
@@ -77,3 +78,44 @@
       type: open
   mode: single
 
+- alias: target mode
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.oneplus_de_yanek_wifi_bssid
+      to: e8:9f:80:af:7d:65
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+      from: null
+  condition: [ ]
+  action:
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: none
+      target:
+        entity_id: climate.general
+  mode: single
+
+- alias: Away mode
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.oneplus_de_yanek_wifi_bssid
+      to: null
+      from: e8:9f:80:af:7d:65
+      for:
+        hours: 0
+        minutes: 15
+        seconds: 0
+  condition: [ ]
+  action:
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: away
+      target:
+        entity_id: climate.general
+  mode: single
