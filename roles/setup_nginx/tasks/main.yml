@@ -24,3 +24,4 @@
 - name: Create and start nginx services
   community.docker.docker_compose:
     project_src: /home/yanck/nginx
+    pull: true

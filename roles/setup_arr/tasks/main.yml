@@ -78,3 +78,4 @@
 - name: Create and start arr services
   community.docker.docker_compose:
     project_src: /home/yanck/arr
+    pull: true

@@ -36,3 +36,4 @@
 - name: Create and start mosquitto services
   community.docker.docker_compose:
     project_src: /home/yanck/mosquitto
+    pull: true
