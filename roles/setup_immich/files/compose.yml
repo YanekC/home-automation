@@ -17,8 +17,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
-    ports:
-      - 2283:3001
     depends_on:
       - redis
       - database
@@ -43,6 +41,9 @@ services:
       - redis
       - database
     restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.11
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -52,11 +53,17 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.12
 
   redis:
     container_name: immich_redis
     image: redis:6.2-alpine@sha256:b6124ab2e45cc332e16398022a411d7e37181f21ff7874835e0180f56a09e82a
     restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.13
 
   database:
     container_name: immich_postgres
@@ -70,6 +77,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
+    networks:
+      network:
+        ipv4_address: 10.5.0.14
 
 volumes:
   pgdata:
