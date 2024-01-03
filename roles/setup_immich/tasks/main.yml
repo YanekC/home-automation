@@ -1,0 +1,25 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: /home/yanck/immich/
+    state: directory
+- name: Copy docker compose file to pi
+  ansible.builtin.copy:
+    src: ../files/
+    dest: /home/yanck/immich/
+    force: true
+- name: Copy env file to pi
+  ansible.builtin.template:
+    src: ../secrets/.env.j2
+    dest: /home/yanck/immich/.env
+    force: true
+
+
+- name: Tear down immich services
+  community.docker.docker_compose:
+    project_src: /home/yanck/immich
+    state: absent
+
+- name: Create and start immich services
+  community.docker.docker_compose:
+    project_src: /home/yanck/immich
+    pull: true

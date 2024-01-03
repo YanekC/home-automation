@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    gros_disque_path: /mnt/gros_disque
+    grosse_usb_path: /mnt/grosse_usb/immich
+
+  tasks:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+    - name: Setup immich
+      include_role:
+        name: setup_immich
