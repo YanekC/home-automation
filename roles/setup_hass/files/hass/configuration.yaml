@@ -17,7 +17,6 @@ homeassistant:
   time_zone: "Europe/Paris"
   external_url: "https://hass.yanck.ovh"
   internal_url: "https://hass.yanck.ovh"
-  legacy_templates: false
 
 automation: !include automations.yaml
 automation sdb bas: !include automation_sdb_bas.yaml
