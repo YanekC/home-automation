@@ -77,3 +77,10 @@
     minute: '*/8'
     job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
     state: absent
+
+- name: add cron for rclone
+  ansible.builtin.cron:
+    name: rclone-cron
+    day : '*/1'
+    job: "rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup"
+    state: present

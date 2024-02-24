@@ -7,6 +7,10 @@
     arr_user: arr_user
     arr_user_uid: 1053
 
+  roles:
+    - role: stefangweichinger.ansible_rclone
+      rclone_version: 1.65.2
+
   tasks:
     - name: Install Packages
       include_role:
