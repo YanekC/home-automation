@@ -37,7 +37,7 @@ climate:
   - platform: generic_thermostat
     name: Général
     unique_id: generic_thermostat_general
-    heater: switch.shelly1pm_pac_switch_0
+    heater: switch.shellyplus1_pac_switch_0
     target_sensor: sensor.shellyht_1bddbd_temperature
     min_temp: 15
     max_temp: 25
