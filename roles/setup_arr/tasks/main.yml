@@ -35,20 +35,31 @@
     state: directory
 - name: Recursively change ownership of /data
   ansible.builtin.file:
-    path: "{{ gros_disque_path }}/data"
+    path: "{{ gros_disque_path }}/data/{{ item }}"
     state: directory
     recurse: yes
     owner: "{{ arr_user }}"
     group: users
     mode: a=,a+rX,u+w,g+w
+  loop:
+    - torrents
+    - media
 - name: Recursively change ownership of /config
   ansible.builtin.file:
-    path: "{{ gros_disque_path }}/config"
+    path: "{{ gros_disque_path }}/config/{{ item }}"
     state: directory
     recurse: yes
     owner: "{{ arr_user }}"
     group: users
     mode: a=,a+rX,u+w,g+w
+  loop:
+    - bazarr
+    - jellyfin
+    - jellyseerr
+    - prowlarr
+    - qbittorrent
+    - radarr
+    - sonarr
 
 
 
