@@ -15,7 +15,7 @@
 
 
 - name: Tear down immich services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/immich
     state: absent
 
@@ -34,6 +34,6 @@
     - upload
 
 - name: Create and start immich services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/immich
-    pull: true
+    pull: always

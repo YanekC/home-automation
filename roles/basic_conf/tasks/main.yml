@@ -78,9 +78,17 @@
     job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
     state: absent
 
+- name: Creates an entry like "PATH=/usr/local/bin:/usr/bin:/bin" on top of crontab
+  ansible.builtin.cron:
+    user: yanck
+    name: PATH
+    env: yes
+    job: /usr/local/bin:/usr/bin:/bin
+
 - name: add cron for rclone
   ansible.builtin.cron:
+    user: yanck
     name: rclone-cron
-    day : '*/1'
-    job: "rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup"
+    special_time: hourly
+    job: "rclone lsd proton_drive: && rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup"
     state: present
