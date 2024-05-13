@@ -40,6 +40,11 @@
     from_ip: 192.168.0.0/16
     rule: allow
     proto: any
+- name: open firewall on tcp for docker interface
+  community.general.ufw:
+    from_ip: 10.5.0.0/16
+    rule: allow
+    proto: any
 - name: Enable firewall
   community.general.ufw:
     state: enabled
