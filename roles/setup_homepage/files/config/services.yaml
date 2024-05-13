@@ -1,0 +1,124 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+- Téléchargements:
+    - qBittorrent:
+        href: http://192.168.2.195:8080
+        icon: qbittorrent
+        description: Gestionnaire de torrents
+        server: my-docker
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: http://192.168.2.195:8080
+          username: {{HOMEPAGE_VAR_QBITTORRENT_USER}}
+          password: {{HOMEPAGE_VAR_QBITTORRENT_PWD}}
+    - Prowlarr:
+        href: http://192.168.2.195:9696
+        icon: prowlarr
+        description: Gestionnaire d'indexeurs
+        server: my-docker
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: http://192.168.2.195:9696
+          key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
+    - Sonarr:
+        href: http://192.168.2.195:8989
+        icon: sonarr
+        description: Récupère automatiquement les séries
+        server: my-docker
+        container: sonarr
+        widget:
+          type: sonarr
+          url: http://192.168.2.195:8989
+          key: {{HOMEPAGE_VAR_SONARR_KEY}}
+    - Radarr:
+        href: http://192.168.2.195:7878
+        icon: radarr
+        description: Récupère automatiquement les films
+        server: my-docker
+        container: radarr
+        widget:
+          type: radarr
+          url: http://192.168.2.195:7878
+          key: {{HOMEPAGE_VAR_RADARR_KEY}}
+    - Jellyseerr:
+        href: http://192.168.2.195:5055
+        icon: jellyseerr
+        description: UI pour requêter des médias
+        server: my-docker
+        container: jellyseerr
+        widget:
+          type: jellyseerr
+          url: http://192.168.2.195:5055
+          key: {{HOMEPAGE_VAR_JELLYSEER_KEY}}
+- Médias:
+    - Jellyfin:
+        href: http://192.168.2.195:8096
+        icon: jellyfin
+        description: UI pour lire des médias
+        server: my-docker
+        container: jellyfin
+        widget:
+          type: jellyfin
+          url: http://192.168.2.195:8096
+          key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
+    - Immich:
+        href: https://photo.yanck.ovh
+        icon: immich
+        description: Bibliothèque de photos
+        server: my-docker
+        container: immich_server
+        widget:
+          type: immich
+          url: https://photo.yanck.ovh
+          key: {{HOMEPAGE_VAR_IMMICH_KEY}}
+- Home automation:
+    - Home Assitant:
+        href: https://hass.yanck.ovh
+        icon: home-assistant
+        description: Automatisation de la maison (et plus encore)
+        server: my-docker
+        container: homeassistant
+        widget:
+          type: homeassistant
+          url: https://hass.yanck.ovh
+          key: {{HOMEPAGE_VAR_HASS_KEY}}
+    - Mosquitto:
+        description: Server MQTT
+        icon: eclipse-mosquitto
+        server: my-docker
+        container: mosquitto
+- Utilitaires:
+    - NGINX:
+        description: Reverse-proxy
+        icon: nginx
+        server: my-docker
+        container: nginx
+- Server Monitoring:
+    - CPU Usage:
+        widget:
+          type: glances
+          version: 4
+          url: http://192.168.2.195:61208
+          metric: cpu
+    - Network Usage:
+        widget:
+          type: glances
+          version: 4
+          url: http://192.168.2.195:61208
+          metric: network:enp1s0
+    - Memory Usage:
+        widget:
+          type: glances
+          version: 4
+          url: http://192.168.2.195:61208
+          metric: memory
+    - Processes:
+        widget:
+          type: glances
+          version: 4
+          url: http://192.168.2.195:61208
+          metric: process

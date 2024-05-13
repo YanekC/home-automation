@@ -1,0 +1,23 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+
+- search:
+    provider: custom
+    url: https://www.startpage.com/sp/search?query=
+    target: _blank
+    suggestionUrl: https://www.startpage.com/osuggestions?q= # Optional
+    showSearchSuggestions: true # Optional
+
+- glances:
+      url: http://192.168.2.195:61208
+      version: 4 # required only if running glances v4 or higher, defaults to 3
+      cpu: true # optional, enabled by default, disable by setting to false
+      mem: true # optional, enabled by default, disable by setting to false
+      cputemp: true # disabled by default
+      uptime: true # disabled by default
+      disk:
+        - /
+        - /mnt/gros_disque # disabled by default, use mount point of disk(s) in glances. Can also be a list (see below)
+      diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
+      expanded: true # show the expanded view

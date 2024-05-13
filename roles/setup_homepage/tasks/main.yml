@@ -1,0 +1,37 @@
+- name: Create directory config/homepage
+  ansible.builtin.file:
+    path: "{{ grosse_usb_path }}"
+    state: directory
+
+- name: Copy all config files
+  ansible.builtin.copy:
+    src: ../files/config/
+    dest: "{{ grosse_usb_path }}"
+    force: true
+
+- name: Create directory yanck/homepage
+  ansible.builtin.file:
+    path: "/home/yanck/homepage"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.template:
+    src: ../files/docker-compose.yml.j2
+    dest: /home/yanck/homepage/docker-compose.yml
+    force: true
+- name: Copy secret env file
+  ansible.builtin.template:
+    src: ../secrets/.env
+    dest: /home/yanck/homepage/.env
+    force: true
+
+
+- name: Tear down homepage services
+  community.docker.docker_compose:
+    project_src: /home/yanck/homepage
+    state: absent
+
+- name: Create and start homepage services
+  community.docker.docker_compose:
+    project_src: /home/yanck/homepage
+    pull: true
