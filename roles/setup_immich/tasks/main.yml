@@ -19,19 +19,19 @@
     project_src: /home/yanck/immich
     state: absent
 
-- name: Recursively change ownership of /data
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/data/{{ item }}"
-    state: directory
-    recurse: yes
-    owner: "root"
-    group: users
-    mode: a=,a+rX,u+w,g+w
-  loop:
-    - encoded-video
-    - library
-    - thumbs
-    - upload
+#- name: Recursively change ownership of /data
+#  ansible.builtin.file:
+#    path: "{{ gros_disque_path }}/data/{{ item }}"
+#    state: directory
+#    recurse: yes
+#    owner: "root"
+#    group: users
+#    mode: a=,a+rX,u+w,g+w
+#  loop:
+#    - encoded-video
+#    - library
+#    - thumbs
+#    - upload
 
 - name: Create and start immich services
   community.docker.docker_compose_v2:
