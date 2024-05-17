@@ -2,6 +2,10 @@
   ansible.builtin.file:
     path: /home/yanck/immich/
     state: directory
+- name: Create backup directory
+  ansible.builtin.file:
+    path: {{ gros_disque_path }}/data/immich_db_backup
+    state: directory
 - name: Copy docker compose file to pi
   ansible.builtin.copy:
     src: ../files/
