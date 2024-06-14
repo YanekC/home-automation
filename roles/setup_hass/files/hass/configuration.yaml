@@ -49,3 +49,42 @@ climate:
       minutes: 3
     away_temp: 16
     precision: 0.5
+
+schedule:
+  heures_creuses:
+    name: "Heures creuses"
+    monday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    tuesday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    wednesday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    thursday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    friday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    saturday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
+    sunday:
+      - from: "02:26:00"
+        to: "07:56:00"
+      - from: "14:26:00"
+        to: "16:56:00"
