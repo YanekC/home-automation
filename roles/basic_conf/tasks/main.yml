@@ -94,6 +94,7 @@
   ansible.builtin.cron:
     user: yanck
     name: rclone-cron
-    special_time: hourly
-    job: "rclone lsd proton_drive: && rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup"
+    hour: 2
+    minute: 0
+    job: "rclone lsd proton_drive: && rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup && rclone sync /mnt/gros_disque/data/immich_db_backup proton_drive:/immich/db_backup && rclone sync /mnt/gros_disque/data/library proton_drive:/immich/library && rclone sync /mnt/gros_disque/data/profile proton_drive:/immich/profile && rclone sync /mnt/gros_disque/data/upload proton_drive:/immich/upload"
     state: present
