@@ -18,6 +18,11 @@
     src: ../secrets/.db.env.j2
     dest: /home/yanck/firefly/.db.env
     force: true
+- name: Copy importer.env file to pi
+  ansible.builtin.template:
+    src: ../secrets/.importer.env.j2
+    dest: /home/yanck/firefly/.importer.env
+    force: true
 - name: Tear down firefly services
   community.docker.docker_compose_v2:
     project_src: /home/yanck/firefly
