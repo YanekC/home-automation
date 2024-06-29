@@ -1,22 +1,12 @@
-Setup de l'image:
--Download l'image
--Checker le checksum
--Copier la conf wpa, le fichier ssh, et la conf de l'user dans la partition boot
-
---> a la mano, trouver l'adresse du rpi et la fixer dans la config de la box
-
-Setup du pi:
+Setup de la machine:
 -Setup le key only ssh config
 -Update le pi
 -Forcer sudo à utiliser un passwd
--Setup un firewall
--Setup fail2ban
+-Donner une ip static
+-Vérifier les chemin en dur a droite a gauche
+-Setup des DNS pour rediriger au bon endroit. Aujourdh'ui il n'y a pas de dyndns
 
--Monter un disque dur pour stocker tout le bordel qu'on va mettre
-
--Setup un reverse proxy
-
--Setup Home Assistant
+Lancer les script ansible, en premier le setup rpi
 
 -Recuperer un certificat ssl:
     Impossible de recup automatiquement via certbot pour la generation du cert. Du coup les commandes a faire a la main :
@@ -26,3 +16,5 @@ Setup du pi:
         --dns-ovh-propagation-seconds 60 \
         -d *.yanck.ovh
         
+Se connecter a ProtonDrive via rclone
+Setup nut --> a automatiser, surtout de la copie de fichiers. Tester NUT 
