@@ -9,7 +9,7 @@
 
   roles:
     - role: stefangweichinger.ansible_rclone
-      rclone_version: 1.66.0
+      rclone_version: 1.67.0
 
   tasks:
     - name: Install Packages
