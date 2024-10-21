@@ -31,3 +31,11 @@
     #need good venv in inventory
     #pip install "cython<3.0.0" wheel && pip install pyyaml==5.4.1 --no-build-isolatio ??
     name: ['docker', 'docker-compose' ]
+
+- name: clean docker
+  community.docker.docker_prune:
+    containers: true
+    images: true
+    networks: true
+    volumes: true
+    builder_cache: true
