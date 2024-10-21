@@ -33,6 +33,12 @@ http:
   login_attempts_threshold: 5
   cors_allowed_origins: https://hass.yanck.ovh
 
+device_tracker:
+  - platform: luci
+    host: 192.168.2.1
+    username: !secret openwrt_user
+    password: !secret openwrt_pwd
+
 climate:
   - platform: generic_thermostat
     name: Général
@@ -45,8 +51,8 @@ climate:
     target_temp: 21
     cold_tolerance: 0
     hot_tolerance: 0
-    keep_alive:
-      minutes: 3
+    min_cycle_duration :
+      minutes: 15
     away_temp: 16
     precision: 0.5
 
