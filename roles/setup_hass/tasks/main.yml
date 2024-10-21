@@ -13,6 +13,11 @@
     src: ../files/hass/
     dest: /mnt/grosse_usb/hass/
     force: true
+- name: Copy secret files to hass
+  ansible.builtin.copy:
+    src: ../secrets/
+    dest: /mnt/grosse_usb/hass/
+    force: true
 - name: Copy hass conf files to pi
   ansible.builtin.copy:
     src: ../files/hass_no_force/
@@ -20,11 +25,11 @@
     force: false
 
 - name: Tear down hass services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/hass
     state: absent
 
 - name: Create and start hass services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/hass
-    pull: true
+    pull: always

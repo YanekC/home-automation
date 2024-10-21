@@ -27,11 +27,11 @@
 
 
 - name: Tear down homepage services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/homepage
     state: absent
 
 - name: Create and start homepage services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/homepage
-    pull: true
+    pull: always

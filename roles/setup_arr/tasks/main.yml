@@ -82,11 +82,11 @@
 
 
 - name: Tear down arr services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/arr
     state: absent
 
 - name: Create and start arr services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/arr
-    pull: true
+    pull: always

@@ -29,11 +29,11 @@
 
 
 - name: Tear down mosquitto services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/mosquitto
     state: absent
 
 - name: Create and start mosquitto services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/mosquitto
-    pull: true
+    pull: always

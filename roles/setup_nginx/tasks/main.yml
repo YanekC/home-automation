@@ -17,11 +17,11 @@
 
 
 - name: Tear down nginx services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/nginx
     state: absent
 
 - name: Create and start nginx services
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/yanck/nginx
-    pull: true
+    pull: always
