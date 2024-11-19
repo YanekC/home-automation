@@ -11,7 +11,7 @@
         container: qbittorrent
         widget:
           type: qbittorrent
-          url: http://192.168.2.195:8080
+          url: http://172.17.0.1:8080
           username: {{HOMEPAGE_VAR_QBITTORRENT_USER}}
           password: {{HOMEPAGE_VAR_QBITTORRENT_PWD}}
     - Prowlarr:
@@ -22,7 +22,7 @@
         container: prowlarr
         widget:
           type: prowlarr
-          url: http://192.168.2.195:9696
+          url: http://172.17.0.1:9696
           key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
     - Sonarr:
         href: http://192.168.2.195:8989
@@ -32,7 +32,7 @@
         container: sonarr
         widget:
           type: sonarr
-          url: http://192.168.2.195:8989
+          url: http://172.17.0.1:8989
           key: {{HOMEPAGE_VAR_SONARR_KEY}}
     - Radarr:
         href: http://192.168.2.195:7878
@@ -42,7 +42,7 @@
         container: radarr
         widget:
           type: radarr
-          url: http://192.168.2.195:7878
+          url: http://172.17.0.1:7878
           key: {{HOMEPAGE_VAR_RADARR_KEY}}
     - Jellyseerr:
         href: http://192.168.2.195:5055
@@ -52,7 +52,7 @@
         container: jellyseerr
         widget:
           type: jellyseerr
-          url: http://192.168.2.195:5055
+          url: http://172.17.0.1:5055
           key: {{HOMEPAGE_VAR_JELLYSEER_KEY}}
 - Médias:
     - Jellyfin:
@@ -63,7 +63,7 @@
         container: jellyfin
         widget:
           type: jellyfin
-          url: http://192.168.2.195:8096
+          url: http://172.17.0.1:8096
           key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
     - Immich:
         href: https://photo.yanck.ovh
@@ -102,23 +102,23 @@
         widget:
           type: glances
           version: 4
-          url: http://192.168.2.195:61208
+          url: http://172.17.0.1:61208
           metric: cpu
     - Network Usage:
         widget:
           type: glances
           version: 4
-          url: http://192.168.2.195:61208
+          url: http://172.17.0.1:61208
           metric: network:enp1s0
     - Memory Usage:
         widget:
           type: glances
           version: 4
-          url: http://192.168.2.195:61208
+          url: http://172.17.0.1:61208
           metric: memory
     - Processes:
         widget:
           type: glances
           version: 4
-          url: http://192.168.2.195:61208
+          url: http://172.17.0.1:61208
           metric: process
