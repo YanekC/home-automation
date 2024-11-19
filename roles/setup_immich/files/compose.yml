@@ -99,29 +99,6 @@ services:
       network:
         ipv4_address: 10.5.0.14
 
-  backup:
-    container_name: immich_db_dumper
-    image: prodrigestivill/postgres-backup-local:14
-    restart: always
-    env_file:
-      - .env
-    environment:
-      POSTGRES_HOST: database
-      POSTGRES_CLUSTER: 'TRUE'
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE_NAME}
-      SCHEDULE: "@daily"
-      POSTGRES_EXTRA_OPTS: '--clean --if-exists'
-      BACKUP_DIR: /db_dumps
-    volumes:
-      - ${DB_BACKUPS_LOCATION}:/db_dumps
-    depends_on:
-      - database
-    networks:
-      network:
-        ipv4_address: 10.5.0.15
-
 volumes:
   pgdata:
   model-cache:
