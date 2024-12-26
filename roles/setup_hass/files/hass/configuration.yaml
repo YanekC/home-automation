@@ -56,6 +56,13 @@ climate:
     away_temp: 16
     precision: 0.5
 
+# Example configuration.yaml entry
+command_line:
+  - sensor:
+      name: DNS resolution time
+      command: "dig +retries=1 force.com | grep -A 100 'ANSWER SECTION:' | grep -Po '(?<=Query time: )[0-9a]*' || echo '-10'"
+      unit_of_measurement: "mS"
+
 schedule:
   heures_creuses:
     name: "Heures creuses"
