@@ -30,6 +30,10 @@
       include_role:
         name: setup_mqtt_broker
 
+    - name: Setup matter server
+      include_role:
+        name: setup_matter
+
     - name: Setup home assistant
       include_role:
         name: setup_hass

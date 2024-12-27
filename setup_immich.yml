@@ -13,6 +13,9 @@
     - name: Basic Conf
       include_role:
         name: basic_conf
+    - name: Setup matter server
+      include_role:
+        name: setup_matter
     - name: Setup immich
       include_role:
         name: setup_immich

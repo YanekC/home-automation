@@ -1,0 +1,20 @@
+- name: Create directory yanck/matter
+  ansible.builtin.file:
+    path: "/home/yanck/matter"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.copy:
+    src: ../files/compose.yml
+    dest: /home/yanck/matter/compose.yml
+    force: true
+
+- name: Tear down homepage services
+  community.docker.docker_compose_v2:
+    project_src: /home/yanck/matter
+    state: absent
+
+- name: Create and start homepage services
+  community.docker.docker_compose_v2:
+    project_src: /home/yanck/matter
+    pull: always
