@@ -1,0 +1,20 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: "{{ home_path }}"
+    state: directory
+- name: Copy docker compose file to pi
+  ansible.builtin.template:
+    src: ../files/compose.yml.j2
+    dest: "{{ home_path }}/compose.yml"
+    force: true
+
+
+- name: Tear down hass services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path }}"
+    state: absent
+
+- name: Create and start hass services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path }}"
+    pull: always
