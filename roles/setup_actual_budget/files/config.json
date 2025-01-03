@@ -1,0 +1,6 @@
+{
+  "https": {
+    "key": "/etc/letsencrypt/live/yanck.ovh/privkey.pem",
+    "cert": "/etc/letsencrypt/live/yanck.ovh/fullchain.pem"
+  }
+}
