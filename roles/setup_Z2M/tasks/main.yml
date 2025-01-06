@@ -1,0 +1,35 @@
+- name: Create directory yanck/Z2M
+  ansible.builtin.file:
+    path: "{{ home_path_z2m }}"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.template:
+    src: ../files/compose.yml.j2
+    dest: "{{ home_path_z2m }}/compose.yml"
+    force: true
+
+- name: Create directory yanck/Z2M
+  ansible.builtin.file:
+    path: "{{ gros_disque_path }}/z2m/data"
+    state: directory
+- name: Copy conf
+  ansible.builtin.copy:
+    src: ../files/config/configuration.yaml
+    dest: "{{ gros_disque_path }}/z2m/data"
+    force: true
+- name: Copy secrets
+  ansible.builtin.copy:
+    src: ../secrets/secret.yaml
+    dest: "{{ gros_disque_path }}/z2m/data"
+    force: true
+
+- name: Tear down Z2M services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_z2m }}"
+    state: absent
+
+- name: Create and start Z2M services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_z2m }}"
+    pull: always

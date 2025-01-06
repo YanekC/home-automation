@@ -4,6 +4,7 @@
 
   vars:
     gros_disque_path: /mnt/gros_disque
+    home_path_z2m: /home/yanck/z2m
     arr_user: arr_user
     arr_user_uid: 1053
 
@@ -29,6 +30,10 @@
     - name: Setup mosquitto
       include_role:
         name: setup_mqtt_broker
+
+    - name: Setup Z2M
+      include_role:
+        name: setup_Z2M
 
     - name: Setup matter server
       include_role:

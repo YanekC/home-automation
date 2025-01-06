@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    restart: unless-stopped
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - {{gros_disque_path}}/z2m/data:/app/data
+      - /run/udev:/run/udev:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8082:8080
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    networks:
+      network:
+        ipv4_address: 10.5.0.5
+
+networks:
+  network:
+    name: proxy_network
+    external: true
