@@ -6,6 +6,8 @@
     gros_disque_path: /mnt/gros_disque
     grosse_usb_path: /mnt/grosse_usb/homepage
 
+    home_path_beszel: /home/yanck/beszel
+
   tasks:
     - name: Install Packages
       include_role:
@@ -13,6 +15,10 @@
     - name: Basic Conf
       include_role:
         name: basic_conf
+
+    - name: Setup beszel
+      include_role:
+        name: setup_beszel
     - name: Setup homepage
       include_role:
         name: setup_homepage
