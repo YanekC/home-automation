@@ -17,7 +17,8 @@
   ansible.builtin.copy:
     src: ../files/config/configuration.yaml
     dest: "{{ gros_disque_path }}/z2m/data"
-    force: true
+    #Because Z2M can update the config file itself, we risk losing data
+    #force: true
 - name: Copy secrets
   ansible.builtin.copy:
     src: ../secrets/secret.yaml
