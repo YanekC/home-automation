@@ -53,7 +53,7 @@ climate:
     hot_tolerance: 0
     min_cycle_duration :
       minutes: 15
-    away_temp: 16
+    away_temp: 18
     precision: 0.5
 
 # Example configuration.yaml entry
