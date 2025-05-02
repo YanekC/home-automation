@@ -4,7 +4,7 @@
 
   vars:
     gros_disque_path: /mnt/gros_disque
-    grosse_usb_path: /mnt/grosse_usb/homepage
+    grosse_usb_path: /mnt/grosse_usb
 
     home_path_beszel: /home/yanck/beszel
 
@@ -19,6 +19,3 @@
     - name: Setup beszel
       include_role:
         name: setup_beszel
-    - name: Setup homepage
-      include_role:
-        name: setup_homepage
