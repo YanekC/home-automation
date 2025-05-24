@@ -23,19 +23,24 @@
 - name: Add ssh rule to firewall
   community.general.ufw:
     rule: limit
-    to_port: ssh
+    to_port: "ssh"
     proto: tcp
 - name: Add http rule to firewall
   community.general.ufw:
     rule: allow
-    to_port : http
+    to_port : "http"
     proto: tcp
 - name: Add https rule to firewall
   community.general.ufw:
     rule: allow
-    to_port : https
+    to_port : "https"
     proto: tcp
-- name: open firewall on tcp lan
+- name: Add custom rule for minecraft
+  community.general.ufw:
+    rule: allow
+    to_port: "15571"
+    proto: any
+- name: open firewall on lan
   community.general.ufw:
     from_ip: 192.168.0.0/16
     rule: allow

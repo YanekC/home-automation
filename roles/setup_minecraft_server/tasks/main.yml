@@ -1,0 +1,27 @@
+- name: Create directory yanck/minecraft
+  ansible.builtin.file:
+    path: "{{ home_path_minecraft }}"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.copy:
+    src: ../files/compose.yml
+    dest: "{{ home_path_minecraft }}/compose.yml"
+    force: true
+
+- name: Copy secret env file
+  ansible.builtin.template:
+    src: ../secrets/.env
+    dest: "{{ home_path_minecraft }}/.env"
+    force: true
+
+
+- name: Tear down minecraft services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_minecraft }}"
+    state: absent
+
+- name: Create and start minecraft services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_minecraft }}"
+    pull: always

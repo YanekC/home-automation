@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    gros_disque_path: /mnt/gros_disque
+    grosse_usb_path: /mnt/grosse_usb
+
+    home_path_minecraft: /home/yanck/minecraft
+
+  tasks:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+
+    - name: Setup nginx
+      include_role:
+        name: setup_nginx
+
+    - name: Setup minecraft
+      include_role:
+        name: setup_minecraft_server

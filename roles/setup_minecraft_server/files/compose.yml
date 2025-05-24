@@ -1,0 +1,37 @@
+services:
+  minecraft:
+    container_name: minecraft
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    restart: always
+    environment:
+      EULA: true
+      MEMORY: 2G
+      UID: 1026
+      GID: 1026
+      TZ: Europe/Paris
+      TYPE: PAPER
+      VERSION: 1.21.4
+      PAPER_BUILD: 227
+      HARDCORE: true
+      ONLINE_MODE: FALSE
+      DIFFICULTY: hard
+      ENFORCE_WHITELIST : false
+      MOTD: "Miagiciens"
+      OPS: |
+        0_dragon2102_
+    volumes:
+      # Use managed volume by default, but can change to a relative path like
+      # ./data:/data
+      # to use a host directory
+      - ./data:/data
+    networks:
+      network:
+        ipv4_address: 10.5.0.6
+
+networks:
+  network:
+    name: proxy_network
+    external: true
+
