@@ -14,3 +14,8 @@ jobs:
         # optional (see below):
         with:
           setup_python: "true"
+      - name: Mergify CI Upload
+        if: success() || failure()
+        uses: mergifyio/gha-mergify-ci@v8
+        with:
+          token: ${{ secrets.MERGIFY_TOKEN }}
