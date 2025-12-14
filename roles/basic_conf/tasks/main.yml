@@ -67,6 +67,13 @@
     fstype: ext4
     state: mounted
 
+- name: Mount freecom file system
+  ansible.posix.mount:
+    src: UUID=92d9836b-2872-4ba6-9b05-4ffa8c0ddaa4
+    path: /mnt/hdd_freecom
+    fstype: ext4
+    state: mounted
+
 - name: add udev rules for RTL-SDR dongle
   ansible.builtin.copy:
     src: ../files/rtl-sdr.rules
@@ -100,11 +107,20 @@
     env: yes
     job: /usr/local/bin:/usr/bin:/bin
 
-- name: add cron for rclone
+- name: add cron for rclone to proton
   ansible.builtin.cron:
     user: yanck
     name: rclone-cron
     hour: 2
     minute: 0
     job: "rclone lsd proton_drive: && rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup && rclone sync /mnt/gros_disque/data/backups proton_drive:/immich/db_backup && rclone sync /mnt/gros_disque/data/library proton_drive:/immich/library && rclone sync /mnt/gros_disque/data/profile proton_drive:/immich/profile && rclone sync /mnt/gros_disque/data/upload proton_drive:/immich/upload"
+    state: present
+
+- name: add cron for rclone to local disk
+  ansible.builtin.cron:
+    user: yanck
+    name: rclone-freecom-cron
+    hour: 2
+    minute: 0
+    job: "rclone sync /mnt/grosse_usb/hass/backups/ /mnt/hdd_freecom/hass/backup && rclone sync /mnt/gros_disque/data/backups /mnt/hdd_freecom/immich/db_backup && rclone sync /mnt/gros_disque/data/library /mnt/hdd_freecom/immich/library && rclone sync /mnt/gros_disque/data/profile /mnt/hdd_freecom/immich/profile && rclone sync /mnt/gros_disque/data/upload /mnt/hdd_freecom/immich/upload"
     state: present
