@@ -44,7 +44,7 @@ climate:
     name: Général
     unique_id: generic_thermostat_general
     heater: switch.shellyplus1_pac_switch_0
-    target_sensor: sensor.shellyht_1bddbd_temperature
+    target_sensor: sensor.air_quality_monitor_ikea_temperature
     min_temp: 15
     max_temp: 25
     ac_mode: false
