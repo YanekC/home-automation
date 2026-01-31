@@ -13,6 +13,31 @@ services:
     networks:
       network:
         ipv4_address: 10.5.0.2
+  music-assistant-server:
+    image: ghcr.io/music-assistant/server:latest # <<< Desired release version here (or use beta to get the latest beta version)
+    container_name: music-assistant-server
+    restart: unless-stopped
+    #Network mode must be set to host for MA to work correctly
+    network_mode: host
+    volumes:
+      - /mnt/grosse_usb/music-assistant-server/data:/data/
+    # ports:
+    #   - "8095:8095"
+    #   - "3483:3483"
+    #   - "9090:9090"
+    #   - "9000:9000"
+    # privileged caps (and security-opt) needed to mount smb folders within the container
+    # cap_add:
+    #   - SYS_ADMIN
+    #   - DAC_READ_SEARCH
+    # security_opt:
+    #   - apparmor:unconfined
+    environment:
+      # Provide logging level as environment variable.
+      # default=info, possible=(critical, error, warning, info, debug)
+      - LOG_LEVEL=info
+
+#squeezelite-ffmpeg-x64.exe -o 1 -M "PC Fixe" -s 192.168.2.195
 
 networks:
   network:
