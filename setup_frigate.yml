@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    gros_disque_path: /mnt/gros_disque/data/frigate/
+    home_path: /home/yanck/frigate/
+
+  tasks:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+    - name: Setup frigate
+      include_role:
+        name: setup_frigate
