@@ -2,6 +2,7 @@
 
 QBITTORRENT_ADDR='http://localhost:8080/api/v2'
 TORRENT_HASH="$1"
+# Not exposed so...
 PASSWD="admin:adminadmin"
 
 #https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)

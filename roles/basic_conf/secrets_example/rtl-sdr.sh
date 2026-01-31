@@ -1,0 +1,2 @@
+export MQTT_USER_RTL_SDR=your_mqtt_username
+export MQTT_PASSWD_RTL_SDR=your_mqtt_password
