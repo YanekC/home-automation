@@ -1,11 +1,11 @@
 - name: Create directory
   ansible.builtin.file:
-    path: /home/yanck/nginx/
+    path: "{{ home_path_nginx }}"
     state: directory
 - name: Copy docker compose file to pi
   ansible.builtin.copy:
     src: ../files/
-    dest: /home/yanck/nginx/
+    dest: "{{ home_path_nginx }}/"
     force: true
 
 - name: Create proxy network
@@ -15,13 +15,12 @@
     ipam_config:
       - subnet: 10.5.0.0/16
 
-
 - name: Tear down nginx services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/nginx
+    project_src: "{{ home_path_nginx }}"
     state: absent
 
 - name: Create and start nginx services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/nginx
+    project_src: "{{ home_path_nginx }}"
     pull: always

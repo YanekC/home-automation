@@ -37,12 +37,12 @@
 
 - name: Create directory
   ansible.builtin.file:
-    path: /home/yanck/arr/
+    path: "{{ home_path_arr }}"
     state: directory
 - name: Copy docker compose file to pi
   ansible.builtin.template:
     src: ../files/compose.yml.j2
-    dest: /home/yanck/arr/compose.yml
+    dest: "{{ home_path_arr }}/compose.yml"
     force: true
 - name: Copy script file to pi
   ansible.builtin.copy:
@@ -54,10 +54,10 @@
 
 - name: Tear down arr services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/arr
+    project_src: "{{ home_path_arr }}"
     state: absent
 
 - name: Create and start arr services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/arr
+    project_src: "{{ home_path_arr }}"
     pull: always

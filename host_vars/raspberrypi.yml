@@ -1,0 +1,33 @@
+---
+# Variables for raspberrypi
+
+# Arr services user configuration
+arr_user: arr_user
+arr_user_uid: 1053
+
+# Storage paths
+gros_disque_path: /mnt/gros_disque
+grosse_usb_path: /mnt/grosse_usb
+
+# Service home paths
+home_path_z2m: /home/yanck/z2m
+home_path_beszel: /home/yanck/beszel
+home_path_actual_budget: /home/yanck/actual_budget
+home_path_frigate: /home/yanck/frigate
+home_path_docmost: /home/yanck/docmost
+home_path_hass: /home/yanck/hass
+home_path_arr: /home/yanck/arr
+home_path_immich: /home/yanck/immich
+home_path_nginx: /home/yanck/nginx
+home_path_mosquitto: /home/yanck/mosquitto
+home_path_matter: /home/yanck/matter
+
+# Service-specific paths
+grosse_usb_path_arr: /mnt/grosse_usb/arr
+grosse_usb_path_immich: /mnt/grosse_usb/immich
+grosse_usb_path_docmost: /mnt/grosse_usb/docmost
+
+# Disk mount paths for specific services
+gros_disque_path_actual_budget: /mnt/gros_disque/data/actual_budget
+gros_disque_path_frigate: /mnt/gros_disque/data/frigate
+gros_disque_path_docmost: /mnt/gros_disque/docmost

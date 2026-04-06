@@ -1,6 +1,6 @@
 - name: Create directory
   ansible.builtin.file:
-    path: /home/yanck/immich/
+    path: "{{ home_path_immich }}"
     state: directory
 - name: Create backup directory
   ansible.builtin.file:
@@ -9,18 +9,17 @@
 - name: Copy docker compose file to pi
   ansible.builtin.copy:
     src: ../files/
-    dest: /home/yanck/immich/
+    dest: "{{ home_path_immich }}/"
     force: true
 - name: Copy env file to pi
   ansible.builtin.template:
     src: ../secrets/.env.j2
-    dest: /home/yanck/immich/.env
+    dest: "{{ home_path_immich }}/.env"
     force: true
-
 
 - name: Tear down immich services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/immich
+    project_src: "{{ home_path_immich }}"
     state: absent
 
 #- name: Recursively change ownership of /data
@@ -39,5 +38,5 @@
 
 - name: Create and start immich services
   community.docker.docker_compose_v2:
-    project_src: /home/yanck/immich
+    project_src: "{{ home_path_immich }}"
     pull: always

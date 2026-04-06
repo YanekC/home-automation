@@ -2,10 +2,6 @@
 - hosts: all
   become: yes
 
-  vars:
-    gros_disque_path: /mnt/gros_disque/data/actual_budget
-    home_path: /home/yanck/actual_budget/
-
   tasks:
     - name: Install Packages
       include_role:

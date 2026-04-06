@@ -8,7 +8,7 @@ networks:
 services:
   jellyfin:
     container_name: jellyfin
-    image: ghcr.io/hotio/jellyfin
+    image: ghcr.io/jellyfin/jellyfin:latest
     restart: unless-stopped
     ports:
       - "8096:8096"
@@ -17,7 +17,8 @@ services:
       - PGID=100
       - TZ=Europe/Paris
     volumes:
-      - {{ grosse_usb_path }}/config/jellyfin:/config
+      - {{ grosse_usb_path_arr }}/config/jellyfin:/config
+      - {{ grosse_usb_path_arr }}/config/jellyfin:/config
       - {{ gros_disque_path }}/data:/data
     networks:
       arr_network:
@@ -33,14 +34,14 @@ services:
       - PGID=100
       - TZ=Europe/Paris
     volumes:
-      - {{ grosse_usb_path }}/config/qbittorrent:/config
+      - {{ grosse_usb_path_arr }}/config/qbittorrent:/config
       - {{ gros_disque_path }}/data:/data
     networks:
       arr_network:
         ipv4_address: 172.19.10.6
   jellyseerr:
     container_name: jellyseerr
-    image: ghcr.io/hotio/jellyseerr
+    image: ghcr.io/seerr-team/seerr
     restart: unless-stopped
     ports:
       - "5055:5055"
@@ -49,7 +50,7 @@ services:
       - PGID=100
       - TZ=Europe/Paris
     volumes:
-      - {{ grosse_usb_path }}/config/jellyseerr:/config
+      - {{ grosse_usb_path_arr }}/config/jellyseerr:/config
     networks:
       arr_network:
         ipv4_address: 172.19.10.7

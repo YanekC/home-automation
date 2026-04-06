@@ -1,24 +1,24 @@
 - name: Create directory
   ansible.builtin.file:
-    path: "{{ home_path }}config"
+    path: "{{ home_path_frigate }}config"
     state: directory
 - name: Copy docker compose file
   ansible.builtin.template:
     src: ../files/compose.yml.j2
-    dest: "{{ home_path }}compose.yml"
+    dest: "{{ home_path_frigate }}compose.yml"
     force: true
 - name: Copy config file
   ansible.builtin.template:
     src: ../files/config.yaml
-    dest: "{{ home_path }}config/config.yaml"
+    dest: "{{ home_path_frigate }}config/config.yaml"
     force: true
 
 - name: Tear down hass services
   community.docker.docker_compose_v2:
-    project_src: "{{ home_path }}"
+    project_src: "{{ home_path_frigate }}"
     state: absent
 
 - name: Create and start hass services
   community.docker.docker_compose_v2:
-    project_src: "{{ home_path }}"
+    project_src: "{{ home_path_frigate }}"
     pull: always

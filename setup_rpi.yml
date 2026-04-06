@@ -2,12 +2,6 @@
 - hosts: all
   become: yes
 
-  vars:
-    gros_disque_path: /mnt/gros_disque
-    home_path_z2m: /home/yanck/z2m
-    arr_user: arr_user
-    arr_user_uid: 1053
-
   roles:
     - role: stefangweichinger.ansible_rclone
       rclone_version: 1.67.0
