@@ -11,14 +11,14 @@
     src: ../files/mosquitto/
     dest: /mnt/grosse_usb/mosquitto/config/
     mode: "600"
-    owner: root
+    owner: 1883
     force: true
 - name: Copy mosquitto secrets files to pi
   ansible.builtin.copy:
     src: ../secrets/mosquitto/
     dest: /mnt/grosse_usb/mosquitto/config/
     mode: "600"
-    owner: root
+    owner: 1883
     force: true
 
 - name: Copy docker compose file to pi
