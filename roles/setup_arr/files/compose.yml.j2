@@ -18,8 +18,11 @@ services:
       - TZ=Europe/Paris
     volumes:
       - {{ grosse_usb_path_arr }}/config/jellyfin:/config
-      - {{ grosse_usb_path_arr }}/config/jellyfin:/config
-      - {{ gros_disque_path }}/data:/data
+      - {{ grosse_usb_path_arr }}/config/jellyfin_cache:/cache
+      - type : bind 
+        source: {{ gros_disque_path }}/data/media
+        target: /media
+        read_only: true
     networks:
       arr_network:
         ipv4_address: 172.19.10.5
@@ -41,7 +44,7 @@ services:
         ipv4_address: 172.19.10.6
   jellyseerr:
     container_name: jellyseerr
-    image: ghcr.io/seerr-team/seerr
+    image: ghcr.io/seerr-team/seerr:latest
     restart: unless-stopped
     ports:
       - "5055:5055"
@@ -50,7 +53,7 @@ services:
       - PGID=100
       - TZ=Europe/Paris
     volumes:
-      - {{ grosse_usb_path_arr }}/config/jellyseerr:/config
+      - {{ grosse_usb_path_arr }}/config/jellyseerr:/app/config
     networks:
       arr_network:
         ipv4_address: 172.19.10.7
