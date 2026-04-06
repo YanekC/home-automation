@@ -1,0 +1,40 @@
+services:
+  docmost:
+    image: docmost/docmost:latest
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - {{ grosse_usb_path }}/storage:/app/data/storage
+    networks:
+      network:
+        ipv4_address: 10.5.0.15
+      default:
+
+  db:
+    image: postgres:18
+    env_file:
+      - .db.env
+    restart: unless-stopped
+    volumes:
+      - {{ grosse_usb_path }}/db:/var/lib/postgresql
+
+  redis:
+    image: redis:8
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    restart: unless-stopped
+    volumes:
+      - {{ grosse_usb_path }}/redis:/data
+
+volumes:
+  docmost:
+  db_data:
+  redis_data:
+
+networks:
+  network:
+    name: proxy_network
+    external: true

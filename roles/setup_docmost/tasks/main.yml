@@ -1,0 +1,35 @@
+- name: Create directory workspace
+  ansible.builtin.file:
+    path: "{{ grosse_usb_path }}/workspace"
+    state: directory
+
+- name: Create directory yanck/docmost
+  ansible.builtin.file:
+    path: "{{ home_path_docmost }}"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.template:
+    src: ../files/compose.yml.j2
+    dest: "{{ home_path_docmost }}/compose.yml"
+    force: true
+- name: Copy secret env file
+  ansible.builtin.template:
+    src: ../secrets/.env
+    dest: "{{ home_path_docmost }}/.env"
+    force: true
+- name: Copy secret env file
+  ansible.builtin.template:
+    src: ../secrets/.db.env
+    dest: "{{ home_path_docmost }}/.db.env"
+    force: true
+
+- name: Tear down docmost services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_docmost }}"
+    state: absent
+
+- name: Create and start docmost services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_docmost }}"
+    pull: always
