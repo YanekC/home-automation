@@ -9,59 +9,31 @@
   ansible.builtin.file:
     path: "{{ gros_disque_path }}/data/torrents/movies"
     state: directory
+    owner: "{{ arr_user }}"
+    group: users
+    mode: a=,a+rX,u+w,g+w
 - name: Create directory torrents/tv
   ansible.builtin.file:
     path: "{{ gros_disque_path }}/data/torrents/tv"
     state: directory
+    owner: "{{ arr_user }}"
+    group: users
+    mode: a=,a+rX,u+w,g+w
+
 - name: Create directory media/movies
   ansible.builtin.file:
     path: "{{ gros_disque_path }}/data/media/movies"
     state: directory
+    owner: "{{ arr_user }}"
+    group: users
+    mode: a=,a+rX,u+w,g+w
 - name: Create directory media/tv
   ansible.builtin.file:
     path: "{{ gros_disque_path }}/data/media/tv"
     state: directory
-- name: Create directory config/sonarr
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/config/sonarr"
-    state: directory
-- name: Create directory config/bazarr
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/config/bazarr"
-    state: directory
-- name: Create directory config/radarr
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/config/radarr"
-    state: directory
-- name: Recursively change ownership of /data
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/data/{{ item }}"
-    state: directory
-    recurse: yes
     owner: "{{ arr_user }}"
     group: users
     mode: a=,a+rX,u+w,g+w
-  loop:
-    - torrents
-    - media
-- name: Recursively change ownership of /config
-  ansible.builtin.file:
-    path: "{{ gros_disque_path }}/config/{{ item }}"
-    state: directory
-    recurse: yes
-    owner: "{{ arr_user }}"
-    group: users
-    mode: a=,a+rX,u+w,g+w
-  loop:
-    - bazarr
-    - jellyfin
-    - jellyseerr
-    - prowlarr
-    - qbittorrent
-    - radarr
-    - sonarr
-
-
 
 - name: Create directory
   ansible.builtin.file:
@@ -69,17 +41,16 @@
     state: directory
 - name: Copy docker compose file to pi
   ansible.builtin.template:
-    src: ../files/docker-compose.yml.j2
-    dest: /home/yanck/arr/docker-compose.yml
+    src: ../files/compose.yml.j2
+    dest: /home/yanck/arr/compose.yml
     force: true
 - name: Copy script file to pi
-  ansible.builtin.copy :
+  ansible.builtin.copy:
     src: ../files/remove_tracker.sh
     dest: "{{ gros_disque_path }}/data/torrents/"
     force: true
     owner: "{{ arr_user }}"
     mode: u+rwx
-
 
 - name: Tear down arr services
   community.docker.docker_compose_v2:
