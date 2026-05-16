@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Packages
+      include_role:
+        name: install_packages
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+
+    - name: Setup harmonyz
+      include_role:
+        name: setup_harmonyz

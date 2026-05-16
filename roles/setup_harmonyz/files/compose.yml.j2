@@ -1,0 +1,14 @@
+services:
+  harmonyz:
+    image: ghcr.io/harmonyz/harmonyz
+
+    restart: unless-stopped
+    networks:
+      network:
+        ipv4_address: 10.5.0.16
+      default:
+
+networks:
+  network:
+    name: proxy_network
+    external: true

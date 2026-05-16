@@ -21,6 +21,7 @@ home_path_immich: /home/yanck/immich
 home_path_nginx: /home/yanck/nginx
 home_path_mosquitto: /home/yanck/mosquitto
 home_path_matter: /home/yanck/matter
+home_path_harmonyz: /home/yanck/harmonyz
 
 # Service-specific paths
 grosse_usb_path_arr: /mnt/grosse_usb/arr

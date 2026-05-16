@@ -1,0 +1,20 @@
+- name: Create directory yanck/harmonyz
+  ansible.builtin.file:
+    path: "{{ home_path_harmonyz }}"
+    state: directory
+
+- name: Copy docker compose file
+  ansible.builtin.template:
+    src: ../files/compose.yml.j2
+    dest: "{{ home_path_harmonyz }}/compose.yml"
+    force: true
+
+- name: Tear down harmonyz services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_harmonyz }}"
+    state: absent
+
+- name: Create and start harmonyz services
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_path_harmonyz }}"
+    pull: always
