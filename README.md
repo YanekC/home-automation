@@ -18,3 +18,4 @@ Lancer les script ansible, en premier le setup rpi
         
 Se connecter a ProtonDrive via rclone
 Setup nut --> a automatiser, surtout de la copie de fichiers. Tester NUT 
+Test
