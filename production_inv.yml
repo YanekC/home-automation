@@ -3,4 +3,4 @@ all:
     raspberrypi:
       ansible_user: yanck
       ansible_host: 192.168.2.195
-      ansible_python_interpreter: /home/yanck/python-ansible-venv/ansible2.12/bin/python
+      ansible_python_interpreter: /home/yanck/python-ansible-venv/ansible2.21/bin/python

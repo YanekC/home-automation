@@ -1,0 +1,62 @@
+---
+- hosts: all
+  become: yes
+
+  roles:
+    - role: stefangweichinger.ansible_rclone
+      rclone_version: 1.67.0
+
+  tasks:
+    # Shared base tasks from setup_rpi.yml, setup_immich.yml, setup_homepage.yml, setup_docmost.yml, and setup_arr.yml
+    - name: Install Packages
+      include_role:
+        name: install_packages
+
+    - name: Basic Conf
+      include_role:
+        name: basic_conf
+
+    # setup_rpi.yml
+    - name: Setup SSL
+      include_role:
+        name: setup_ssl
+
+    - name: Setup nginx
+      include_role:
+        name: setup_nginx
+
+    - name: Setup mosquitto
+      include_role:
+        name: setup_mqtt_broker
+
+    - name: Setup Z2M
+      include_role:
+        name: setup_Z2M
+
+    - name: Setup matter server
+      include_role:
+        name: setup_matter
+
+    - name: Setup home assistant
+      include_role:
+        name: setup_hass
+
+    # setup_immich.yml
+    - name: Setup immich
+      include_role:
+        name: setup_immich
+
+    # setup_homepage.yml
+    - name: Setup beszel
+      include_role:
+        name: setup_beszel
+
+    # setup_docmost.yml
+    - name: Setup docmost
+      include_role:
+        name: setup_docmost
+
+    # setup_arr.yml
+    - name: Setup *arr
+      include_role:
+        name: setup_arr

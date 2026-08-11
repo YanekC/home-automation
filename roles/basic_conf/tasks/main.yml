@@ -1,24 +1,23 @@
 - name: Setup SSH option ChallengeResponseAuthentication
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: 'ChallengeResponseAuthentication'
-    line: 'ChallengeResponseAuthentication no'
+    regexp: "ChallengeResponseAuthentication"
+    line: "ChallengeResponseAuthentication no"
 - name: Setup SSH option PasswordAuthentication
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: 'PasswordAuthentication'
-    line: 'PasswordAuthentication  no'
+    regexp: "PasswordAuthentication"
+    line: "PasswordAuthentication  no"
 - name: Setup SSH option PermitRootLogin
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: 'PermitRootLogin'
-    line: 'PermitRootLogin no '
+    regexp: "PermitRootLogin"
+    line: "PermitRootLogin no "
 - name: Setup SSH option UsePAM
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: 'UsePAM'
-    line: 'UsePAM  no'
-
+    regexp: "UsePAM"
+    line: "UsePAM  no"
 
 - name: Add ssh rule to firewall
   community.general.ufw:
@@ -28,12 +27,12 @@
 - name: Add http rule to firewall
   community.general.ufw:
     rule: allow
-    to_port : "http"
+    to_port: "http"
     proto: tcp
 - name: Add https rule to firewall
   community.general.ufw:
     rule: allow
-    to_port : "https"
+    to_port: "https"
     proto: tcp
 - name: Add custom rule for minecraft
   community.general.ufw:
@@ -96,7 +95,7 @@
 - name: add cron for rtl-sdr
   ansible.builtin.cron:
     name: rtl-sdr-cron
-    minute: '*/8'
+    minute: "*/8"
     job: "BASH_ENV=/etc/profile /home/yanck/rtl_433_mqtt.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT"
     state: absent
 
@@ -114,7 +113,7 @@
     hour: 2
     minute: 0
     job: "rclone lsd proton_drive: && rclone sync /mnt/grosse_usb/hass/backups/ proton_drive:/hass/backup && rclone sync /mnt/gros_disque/data/backups proton_drive:/immich/db_backup && rclone sync /mnt/gros_disque/data/library proton_drive:/immich/library && rclone sync /mnt/gros_disque/data/profile proton_drive:/immich/profile && rclone sync /mnt/gros_disque/data/upload proton_drive:/immich/upload"
-    state: present
+    state: absent
 
 - name: add cron for rclone to local disk
   ansible.builtin.cron:
