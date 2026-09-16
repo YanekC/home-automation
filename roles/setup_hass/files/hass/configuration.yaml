@@ -1,37 +1,11 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
-homeassistant:
-  auth_providers:
-    - type: homeassistant
-  auth_mfa_modules:
-    - type: totp
-  name: "Chez Zoé et Yanek"
-  latitude: 47.4005
-  longitude: -2.15012
-  elevation: 20
-  unit_system: metric
-  temperature_unit: C
-  currency: EUR
-  country: FR
-  time_zone: "Europe/Paris"
-  external_url: "https://hass.yanck.ovh"
-  internal_url: "https://hass.yanck.ovh"
-
 automation: !include automations.yaml
 #automation sdb bas: !include automation_sdb_bas.yaml
 #automation general: !include automation_general.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-
-http:
-  use_x_forwarded_for: true
-  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
-  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
-  trusted_proxies: 10.5.0.3
-  ip_ban_enabled: true
-  login_attempts_threshold: 5
-  cors_allowed_origins: https://hass.yanck.ovh
 
 device_tracker:
   - platform: luci
@@ -51,7 +25,7 @@ climate:
     target_temp: 21
     cold_tolerance: 0
     hot_tolerance: 0
-    min_cycle_duration :
+    min_cycle_duration:
       minutes: 15
     away_temp: 18
     precision: 0.5
