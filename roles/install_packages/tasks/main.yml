@@ -21,6 +21,7 @@
         "rtl-433",
         "nut",
         "python3-debian",
+        "smartmontools",
       ]
     state: present
     update_cache: yes

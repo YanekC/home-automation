@@ -3,12 +3,19 @@
     path: "{{ home_path_beszel }}"
     state: directory
 
+- name: create beszel user
+  ansible.builtin.user:
+    name: beszel
+    uid: 1001
+    create_home: no
+    groups: disk
+    append: yes
+
 - name: Copy docker compose file
   ansible.builtin.copy:
     src: ../files/compose.yml
     dest: "{{ home_path_beszel }}"
     force: true
-
 
 - name: Tear down beszel services
   community.docker.docker_compose_v2:
